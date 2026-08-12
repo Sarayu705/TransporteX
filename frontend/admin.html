@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transportex Admin</title>
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body id="top">
+  <!-- ============ HEADER ============ -->
+  <header class="header" data-header>
+    <div class="container header-inner">
+
+      <a href="./index.html" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        Transportex
+      </a>
+
+      <nav class="navbar" data-navbar>
+        <div class="navbar-top">
+          <a href="./index.html" class="logo">Transportex</a>
+          <button class="nav-close-btn" aria-label="Close menu" data-nav-toggler>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+
+        <ul class="navbar-list">
+          <li><a href="./index.html#home" class="navbar-link" data-nav-link>Home</a></li>
+          <li><a href="./index.html#about" class="navbar-link" data-nav-link>About</a></li>
+          <li><a href="./index.html#service" class="navbar-link" data-nav-link>Service</a></li>
+          <li><a href="./index.html#track" class="navbar-link" data-nav-link>Track</a></li>
+          <li><a href="./index.html#blog" class="navbar-link" data-nav-link>Blog</a></li>
+          <li><a href="./index.html#contact" class="navbar-link" data-nav-link>Contact</a></li>
+          <li><a href="./shipment.html" class="navbar-link" data-nav-link>Shipment</a></li>
+          <li><a href="./admin.html" class="navbar-link" data-nav-link>Admin</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="header-contact">
+          <p class="contact-label">Dispatch line</p>
+          <a href="tel:12345678910" class="contact-number">1 234 567 8910</a>
+        </div>
+
+        <div id="accountStatus" class="header-account"></div>
+
+        <a href="./index.html#quote" class="btn btn-accent header-cta">Get a quote</a>
+
+        <button class="nav-open-btn" aria-label="Open menu" data-nav-toggler>
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div class="overlay" data-nav-toggler data-overlay></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section quote" aria-label="admin dashboard">
+      <div class="container quote-grid">
+        <div class="quote-intro">
+          <p class="eyebrow"><span class="eyebrow-dot"></span>Admin dashboard</p>
+          <h2 class="section-title">Manage requests, users and shipments</h2>
+          <p class="section-text">
+            This page displays shipment requests, quote submissions and contact messages in the same order
+            and detail as stored in the database.
+          </p>
+        </div>
+
+        <div class="quote-form" id="adminPanel">
+          <div id="adminLoggedIn" hidden></div>
+
+          <form id="adminLoginForm" novalidate>
+            <div class="form-field">
+              <label for="adminUsername">Admin username</label>
+              <input type="text" id="adminUsername" name="username" required>
+            </div>
+            <div class="form-field">
+              <label for="adminPassword">Admin password</label>
+              <input type="password" id="adminPassword" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-accent form-submit">Login as admin</button>
+          </form>
+
+          <div class="form-field">
+            <label for="adminToken">Admin token (optional)</label>
+            <input type="text" id="adminToken" placeholder="Uses the saved login token automatically if present">
+          </div>
+          <button id="adminLoad" class="btn btn-dark form-submit">Load admin data</button>
+          <p class="form-msg" id="adminMsg" role="status"></p>
+
+          <form class="quote-form" id="shipmentStatusForm" novalidate>
+            <h3 class="section-title" style="font-size: 22px; margin-bottom: 0;">Update shipment status</h3>
+            <div class="form-field">
+              <label for="statusShipmentId">Tracking ID</label>
+              <input type="text" id="statusShipmentId" name="trackingId" placeholder="e.g. TPX-48213-IN" required>
+            </div>
+            <div class="form-field">
+              <label for="statusSelect">Status</label>
+              <select id="statusSelect" name="status" required>
+                <option value="Booked">Booked</option>
+                <option value="Picked Up">Picked Up</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Customs Cleared">Customs Cleared</option>
+                <option value="Out for Delivery">Out for Delivery</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Delayed">Delayed</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="statusLocation">Location</label>
+              <input type="text" id="statusLocation" name="location" required>
+            </div>
+            <div class="form-field">
+              <label for="statusEta">ETA (optional)</label>
+              <input type="text" id="statusEta" name="eta" placeholder="e.g. 2026-08-14">
+            </div>
+            <div class="form-field">
+              <label for="statusNote">Note</label>
+              <textarea id="statusNote" name="note" rows="3" placeholder="What happened at this checkpoint?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-accent form-submit">Save status update</button>
+            <p class="form-msg" id="statusMsg" role="status"></p>
+          </form>
+
+          <div id="adminSections" hidden>
+            <section class="section" aria-label="quote requests">
+              <h3 class="section-title">Quote requests</h3>
+              <div class="admin-table-wrap"><table class="admin-table" id="quotesTable"></table></div>
+            </section>
+
+            <section class="section" aria-label="contact messages">
+              <h3 class="section-title">Contact messages</h3>
+              <div class="admin-table-wrap"><table class="admin-table" id="contactsTable"></table></div>
+            </section>
+
+            <section class="section" aria-label="users">
+              <h3 class="section-title">Users</h3>
+              <div class="admin-table-wrap"><table class="admin-table" id="usersTable"></table></div>
+            </section>
+
+            <section class="section" aria-label="shipments">
+              <h3 class="section-title">Shipments</h3>
+              <div class="admin-table-wrap"><table class="admin-table" id="shipmentsTable"></table></div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./assets/js/api.js" defer></script>
+  <script src="./assets/js/auth.js" defer></script>
+  <script src="./assets/js/script.js" defer></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

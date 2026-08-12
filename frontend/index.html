@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transportex — To Every Direction</title>
+  <meta name="description" content="Transportex moves cargo by air, ocean, road and rail — with a live manifest you can actually track.">
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- css -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+</head>
+
+<body id="top">
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" data-header>
+    <div class="container header-inner">
+
+      <a href="#top" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        Transportex
+      </a>
+
+      <nav class="navbar" data-navbar>
+        <div class="navbar-top">
+          <a href="#top" class="logo">Transportex</a>
+          <button class="nav-close-btn" aria-label="Close menu" data-nav-toggler>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+
+        <ul class="navbar-list">
+          <li><a href="#home" class="navbar-link" data-nav-link>Home</a></li>
+          <li><a href="#about" class="navbar-link" data-nav-link>About</a></li>
+          <li><a href="#service" class="navbar-link" data-nav-link>Service</a></li>
+          <li><a href="#track" class="navbar-link" data-nav-link>Track</a></li>
+          <li><a href="#blog" class="navbar-link" data-nav-link>Blog</a></li>
+          <li><a href="#contact" class="navbar-link" data-nav-link>Contact</a></li>
+          <li><a href="./shipment.html" class="navbar-link">Shipment</a></li>
+          <li><a href="./login.html" class="navbar-link">Login</a></li>
+          <li><a href="./admin.html" class="navbar-link">Admin</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="header-contact">
+          <p class="contact-label">Dispatch line</p>
+          <a href="tel:12345678910" class="contact-number">1 234 567 8910</a>
+        </div>
+
+        <div id="accountStatus" class="header-account"></div>
+
+        <a href="#quote" class="btn btn-accent header-cta">Get a quote</a>
+
+        <button class="nav-open-btn" aria-label="Open menu" data-nav-toggler>
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+      </div>
+
+      <div class="overlay" data-nav-toggler data-overlay></div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+
+      <!-- ============ HERO ============ -->
+      <section class="section hero" id="home" aria-label="home">
+        <div class="container hero-grid">
+
+          <div class="hero-content">
+            <p class="eyebrow"><span class="eyebrow-dot"></span>Air · Ocean · Road · Rail</p>
+
+            <h1 class="hero-title">
+              To every <span class="highlight">direction,</span><br>
+              on time, on record.
+            </h1>
+
+            <p class="hero-text">
+              Transportex moves freight across the map and logs every leg of the journey —
+              so "where's my shipment" always has a real answer.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#quote" class="btn btn-accent">Get a quote</a>
+              <a href="#service" class="btn btn-ghost">View services</a>
+            </div>
+
+            <dl class="hero-stats">
+              <div class="hero-stat">
+                <dt>Countries served</dt>
+                <dd>42</dd>
+              </div>
+              <div class="hero-stat">
+                <dt>Shipments / year</dt>
+                <dd>18,000+</dd>
+              </div>
+              <div class="hero-stat">
+                <dt>On-time rate</dt>
+                <dd>98.4%</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Signature element: live manifest ticket + route line -->
+          <div class="manifest" id="track" aria-label="Track a shipment">
+            <div class="manifest-ticket">
+              <div class="manifest-head">
+                <span class="manifest-kicker">Live manifest</span>
+                <span class="manifest-id" id="manifestId">TPX-000000</span>
+              </div>
+
+              <form class="manifest-form" id="trackForm" novalidate>
+                <label for="trackingInput" class="manifest-label">Tracking ID</label>
+                <div class="manifest-input-row">
+                  <input
+                    type="text"
+                    id="trackingInput"
+                    name="trackingId"
+                    placeholder="e.g. TPX-48213-IN"
+                    autocomplete="off"
+                    class="manifest-input">
+                  <button type="submit" class="manifest-submit" aria-label="Track shipment">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </button>
+                </div>
+                <p class="manifest-hint">Try <button type="button" class="manifest-sample" data-sample="TPX-48213-IN">TPX-48213-IN</button></p>
+              </form>
+
+              <div class="manifest-route" aria-hidden="true">
+                <span class="route-point route-point-start"></span>
+                <span class="route-line"><span class="route-pulse"></span></span>
+                <span class="route-point route-point-end"></span>
+              </div>
+
+              <div class="manifest-result" id="manifestResult" hidden>
+                <div class="manifest-result-row">
+                  <span class="manifest-result-label">Route</span>
+                  <span class="manifest-result-value" id="resultRoute">—</span>
+                </div>
+                <div class="manifest-result-row">
+                  <span class="manifest-result-label">Service</span>
+                  <span class="manifest-result-value" id="resultService">—</span>
+                </div>
+                <div class="manifest-result-row">
+                  <span class="manifest-result-label">Status</span>
+                  <span class="manifest-result-value manifest-status" id="resultStatus">—</span>
+                </div>
+                <div class="manifest-result-row">
+                  <span class="manifest-result-label">ETA</span>
+                  <span class="manifest-result-value" id="resultEta">—</span>
+                </div>
+
+                <ol class="manifest-timeline" id="manifestTimeline"></ol>
+              </div>
+
+              <p class="manifest-status-msg" id="manifestMsg" role="status"></p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============ ABOUT ============ -->
+      <section class="section about" id="about" aria-label="about">
+        <div class="container about-grid">
+
+          <figure class="about-banner img-holder">
+            <img src="./assets/images/about-banner.jpg" width="400" height="720" loading="lazy" alt="Transportex warehouse operations" class="img-cover">
+            <img src="./assets/images/about-shape-1.png" width="260" height="170" loading="lazy" alt="" class="abs-img abs-img-1">
+            <div class="about-badge">
+              <ion-icon name="shield-checkmark-outline"></ion-icon>
+              <div>
+                <strong>ISO 9001</strong>
+                <span>Certified operations</span>
+              </div>
+            </div>
+          </figure>
+
+          <div class="about-content">
+            <p class="eyebrow"><span class="eyebrow-dot"></span>Why choose us</p>
+            <h2 class="section-title">Logistics run like a control tower, not a guessing game</h2>
+            <p class="section-text">
+              We ensure your cargo reaches its destination safely and on time, with real-time
+              tracking and dependable service you can trust — from local deliveries to
+              international freight, handled with precision at every mile.
+            </p>
+
+            <ul class="about-list">
+              <li class="about-item">
+                <ion-icon name="checkmark-circle-outline" class="about-icon"></ion-icon>
+                <p>Real-time visibility from pickup to proof of delivery.</p>
+              </li>
+              <li class="about-item">
+                <ion-icon name="checkmark-circle-outline" class="about-icon"></ion-icon>
+                <p>Multi-modal network across air, ocean, road and rail.</p>
+              </li>
+              <li class="about-item">
+                <ion-icon name="checkmark-circle-outline" class="about-icon"></ion-icon>
+                <p>Dedicated specialists for customs and compliance.</p>
+              </li>
+              <li class="about-item">
+                <ion-icon name="checkmark-circle-outline" class="about-icon"></ion-icon>
+                <p>Warehousing and distribution built around your volume.</p>
+              </li>
+            </ul>
+
+            <a href="#service" class="btn btn-dark">Learn more</a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============ SERVICES ============ -->
+      <section class="section service" id="service" aria-label="service">
+        <div class="container">
+          <p class="eyebrow center"><span class="eyebrow-dot"></span>All services</p>
+          <h2 class="section-title center">Trusted for our services</h2>
+          <p class="section-text center">
+            Transportex has been streamlining cargo delivery for years — blending reliability,
+            speed and technology to move goods across cities and continents.
+          </p>
+
+          <ul class="service-list grid-list">
+
+            <li>
+              <div class="service-card">
+                <div class="card-icon"><img src="./assets/images/service-icon-1.png" width="80" height="60" loading="lazy" alt="Air freight"></div>
+                <h3 class="card-title"><span class="card-index">Air</span>Air Freight</h3>
+                <p class="card-text">Fast, temperature-aware air cargo for time-critical shipments worldwide.</p>
+                <a href="#quote" class="btn-link"><span>Request a rate</span><ion-icon name="chevron-forward"></ion-icon></a>
+              </div>
+            </li>
+
+            <li>
+              <div class="service-card">
+                <div class="card-icon"><img src="./assets/images/service-icon-2.png" width="74" height="60" loading="lazy" alt="Road freight"></div>
+                <h3 class="card-title"><span class="card-index">Road</span>Road Freight</h3>
+                <p class="card-text">Full and part-load trucking with live GPS visibility on every route.</p>
+                <a href="#quote" class="btn-link"><span>Request a rate</span><ion-icon name="chevron-forward"></ion-icon></a>
+              </div>
+            </li>
+
+            <li>
+              <div class="service-card">
+                <div class="card-icon"><img src="./assets/images/service-icon-3.png" width="60" height="60" loading="lazy" alt="Ocean freight"></div>
+                <h3 class="card-title"><span class="card-index">Ocean</span>Ocean Freight</h3>
+                <p class="card-text">FCL and LCL container shipping across every major trade lane.</p>
+                <a href="#quote" class="btn-link"><span>Request a rate</span><ion-icon name="chevron-forward"></ion-icon></a>
+              </div>
+            </li>
+
+            <li>
+              <div class="service-card">
+                <div class="card-icon"><img src="./assets/images/service-icon-4.png" width="50" height="60" loading="lazy" alt="Rail freight"></div>
+                <h3 class="card-title"><span class="card-index">Rail</span>Rail Freight</h3>
+                <p class="card-text">Cost-efficient long-haul rail for heavy and bulk cargo.</p>
+                <a href="#quote" class="btn-link"><span>Request a rate</span><ion-icon name="chevron-forward"></ion-icon></a>
+              </div>
+            </li>
+
+            <li>
+              <div class="service-card">
+                <div class="card-icon"><img src="./assets/images/service-icon-5.png" width="63" height="60" loading="lazy" alt="Warehousing"></div>
+                <h3 class="card-title"><span class="card-index">Store</span>Warehousing</h3>
+                <p class="card-text">Secure, scalable storage with pick-pack-ship fulfillment on demand.</p>
+                <a href="#quote" class="btn-link"><span>Request a rate</span><ion-icon name="chevron-forward"></ion-icon></a>
+              </div>
+            </li>
+
+            <li>
+              <div class="service-card">
+                <div class="card-icon"><img src="./assets/images/service-icon-6.png" width="46" height="60" loading="lazy" alt="Project cargo"></div>
+                <h3 class="card-title"><span class="card-index">Project</span>Project Cargo</h3>
+                <p class="card-text">Engineered handling for oversized, high-value and irregular loads.</p>
+                <a href="#quote" class="btn-link"><span>Request a rate</span><ion-icon name="chevron-forward"></ion-icon></a>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ QUOTE ============ -->
+      <section class="section quote" id="quote" aria-label="get a quote">
+        <div class="container quote-grid">
+
+          <div class="quote-intro">
+            <p class="eyebrow"><span class="eyebrow-dot"></span>Freight quote</p>
+            <h2 class="section-title">Tell us the route. We'll price the move.</h2>
+            <p class="section-text">
+              Share your origin, destination and cargo details — a logistics specialist
+              will follow up with a tailored rate, usually within one business day.
+            </p>
+            <ul class="quote-points">
+              <li><ion-icon name="time-outline"></ion-icon>Response within 24 hours</li>
+              <li><ion-icon name="document-text-outline"></ion-icon>No obligation, no hidden fees</li>
+              <li><ion-icon name="globe-outline"></ion-icon>Domestic and international lanes</li>
+            </ul>
+          </div>
+
+          <form class="quote-form" id="quoteForm" novalidate>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="qName">Full name</label>
+                <input type="text" id="qName" name="name" required>
+              </div>
+              <div class="form-field">
+                <label for="qEmail">Email</label>
+                <input type="email" id="qEmail" name="email" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="qPhone">Phone (optional)</label>
+                <input type="tel" id="qPhone" name="phone">
+              </div>
+              <div class="form-field">
+                <label for="qService">Service type</label>
+                <select id="qService" name="serviceType" required>
+                  <option value="" disabled selected>Choose one</option>
+                  <option>Air Freight</option>
+                  <option>Road Freight</option>
+                  <option>Ocean Freight</option>
+                  <option>Rail Freight</option>
+                  <option>Warehousing</option>
+                  <option>Project Cargo</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="qOrigin">Origin</label>
+                <input type="text" id="qOrigin" name="origin" placeholder="City, country" required>
+              </div>
+              <div class="form-field">
+                <label for="qDestination">Destination</label>
+                <input type="text" id="qDestination" name="destination" placeholder="City, country" required>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="qCargo">Cargo details (optional)</label>
+              <textarea id="qCargo" name="cargoDetails" rows="3" placeholder="Weight, dimensions, special handling…"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-accent form-submit">Request quote</button>
+            <p class="form-msg" id="quoteMsg" role="status"></p>
+          </form>
+
+        </div>
+      </section>
+
+      <!-- ============ PROJECTS ============ -->
+      <section class="section project" aria-label="project">
+        <div class="container">
+          <p class="eyebrow center"><span class="eyebrow-dot"></span>Case files</p>
+          <h2 class="section-title center">Featured moves</h2>
+          <p class="section-text center">
+            A cargo deserves more than movement — it deserves precision, safety and
+            real-time updates at every mile.
+          </p>
+
+          <ul class="project-list">
+            <li class="project-item">
+              <div class="project-card">
+                <figure class="card-banner img-holder">
+                  <img src="./assets/images/project-1.jpg" width="397" height="352" loading="lazy" alt="Warehouse inventory" class="img-cover">
+                </figure>
+                <div class="card-content">
+                  <p class="card-tag">Warehousing · Distribution</p>
+                  <h3 class="h3"><a href="#" class="card-title">Warehouse inventory overhaul</a></h3>
+                </div>
+              </div>
+            </li>
+
+            <li class="project-item">
+              <div class="project-card">
+                <figure class="card-banner img-holder">
+                  <img src="./assets/images/project-2.jpg" width="397" height="352" loading="lazy" alt="Manufacturing logistics" class="img-cover">
+                </figure>
+                <div class="card-content">
+                  <p class="card-tag">Logistics · Analytics</p>
+                  <h3 class="h3"><a href="#" class="card-title">Minimized manufacturing downtime</a></h3>
+                </div>
+              </div>
+            </li>
+
+            <li class="project-item">
+              <div class="project-card">
+                <figure class="card-banner img-holder">
+                  <img src="./assets/images/project-3.jpg" width="397" height="352" loading="lazy" alt="Warehouse inventory" class="img-cover">
+                </figure>
+                <div class="card-content">
+                  <p class="card-tag">Warehousing · Distribution</p>
+                  <h3 class="h3"><a href="#" class="card-title">Cross-dock network rollout</a></h3>
+                </div>
+              </div>
+            </li>
+
+            <li class="project-item">
+              <div class="project-card">
+                <figure class="card-banner img-holder">
+                  <img src="./assets/images/project-4.jpg" width="397" height="352" loading="lazy" alt="Manufacturing logistics" class="img-cover">
+                </figure>
+                <div class="card-content">
+                  <p class="card-tag">Logistics · Analytics</p>
+                  <h3 class="h3"><a href="#" class="card-title">Route optimization at scale</a></h3>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ BLOG ============ -->
+      <section class="section blog" id="blog" aria-label="blog">
+        <div class="container">
+          <p class="eyebrow center"><span class="eyebrow-dot"></span>Dispatch notes</p>
+          <h2 class="section-title center">Recent news & events</h2>
+          <p class="section-text center">Because even packages deserve a first-class trip.</p>
+
+          <ul class="blog-list grid-list">
+            <li>
+              <div class="blog-card">
+                <figure class="card-banner img-holder">
+                  <img src="./assets/images/blog-1.jpg" width="770" height="500" loading="lazy" alt="Private 5G network at Freeport of Riga" class="img-cover">
+                </figure>
+                <div class="card-content">
+                  <time class="card-meta" datetime="2026-08-02"><span>02</span> Aug</time>
+                  <h3 class="h3"><a href="#">Freeport of Riga deploys private 5G for cargo ships</a></h3>
+                  <p class="card-text">
+                    A new private 5G network extends real-time connectivity to cargo ships and
+                    autonomous sea drones up to 100 miles offshore.
+                  </p>
+                  <a href="#" class="btn-link"><span>Read more</span><ion-icon name="chevron-forward"></ion-icon></a>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="blog-card">
+                <figure class="card-banner img-holder">
+                  <img src="./assets/images/blog-2.jpg" width="770" height="500" loading="lazy" alt="Cross-border freight update" class="img-cover">
+                </figure>
+                <div class="card-content">
+                  <time class="card-meta" datetime="2026-08-21"><span>21</span> Aug</time>
+                  <h3 class="h3"><a href="#">Moving product across borders, without the guesswork</a></h3>
+                  <p class="card-text">
+                    A look at how customs pre-clearance and manifest automation are cutting
+                    border wait times for cross-continental freight.
+                  </p>
+                  <a href="#" class="btn-link"><span>Read more</span><ion-icon name="chevron-forward"></ion-icon></a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ CONTACT ============ -->
+      <section class="section contact" id="contact" aria-label="contact">
+        <div class="container contact-grid">
+          <div class="contact-intro">
+            <p class="eyebrow"><span class="eyebrow-dot"></span>Get in touch</p>
+            <h2 class="section-title">Questions before you ship?</h2>
+            <p class="section-text">Send a message and our team will route it to the right desk.</p>
+
+            <ul class="contact-list">
+              <li><ion-icon name="call-outline"></ion-icon><a href="tel:12345678910">1 234 567 8910</a></li>
+              <li><ion-icon name="mail-outline"></ion-icon><a href="mailto:dispatch@transportex.example">dispatch@transportex.example</a></li>
+              <li><ion-icon name="location-outline"></ion-icon>Dock 14, Harbor Logistics Park</li>
+            </ul>
+          </div>
+
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="cName">Name</label>
+                <input type="text" id="cName" name="name" required>
+              </div>
+              <div class="form-field">
+                <label for="cEmail">Email</label>
+                <input type="email" id="cEmail" name="email" required>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="cSubject">Subject (optional)</label>
+              <input type="text" id="cSubject" name="subject">
+            </div>
+            <div class="form-field">
+              <label for="cMessage">Message</label>
+              <textarea id="cMessage" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark form-submit">Send message</button>
+            <p class="form-msg" id="contactMsg" role="status"></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============ NEWSLETTER ============ -->
+      <section class="section newsletter" aria-label="newsletter">
+        <div class="container newsletter-grid">
+          <div>
+            <h2 class="section-title">Subscribe for offers and news</h2>
+            <p class="section-text">One dispatch a month. No spam, ever.</p>
+          </div>
+
+          <form class="newsletter-form" id="newsletterForm" novalidate>
+            <input type="email" name="email_address" id="newsletterEmail" placeholder="Enter your email" aria-label="email" class="email-field" required>
+            <button type="submit" class="newsletter-btn">Subscribe now</button>
+          </form>
+          <p class="form-msg" id="newsletterMsg" role="status"></p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top section">
+
+        <div class="footer-brand">
+          <a href="#top" class="logo"><span class="logo-mark" aria-hidden="true"></span>Transportex</a>
+          <p class="footer-text">Freight moved with a manifest you can actually read.</p>
+          <ul class="social-list">
+            <li><a href="#" class="social-link" aria-label="Facebook"><ion-icon name="logo-facebook"></ion-icon></a></li>
+            <li><a href="#" class="social-link" aria-label="Twitter"><ion-icon name="logo-twitter"></ion-icon></a></li>
+            <li><a href="#" class="social-link" aria-label="Instagram"><ion-icon name="logo-instagram"></ion-icon></a></li>
+            <li><a href="#" class="social-link" aria-label="YouTube"><ion-icon name="logo-youtube"></ion-icon></a></li>
+          </ul>
+        </div>
+
+        <ul class="footer-list">
+          <li><p class="footer-list-title">Quick links</p></li>
+          <li><a href="#about" class="footer-link">About</a></li>
+          <li><a href="#service" class="footer-link">Services</a></li>
+          <li><a href="#blog" class="footer-link">Blog</a></li>
+          <li><a href="#contact" class="footer-link">Contact us</a></li>
+        </ul>
+
+        <ul class="footer-list">
+          <li><p class="footer-list-title">Services</p></li>
+          <li><a href="#service" class="footer-link">Warehousing</a></li>
+          <li><a href="#service" class="footer-link">Air freight</a></li>
+          <li><a href="#service" class="footer-link">Ocean freight</a></li>
+          <li><a href="#service" class="footer-link">Road freight</a></li>
+        </ul>
+
+        <ul class="footer-list">
+          <li><p class="footer-list-title">Community</p></li>
+          <li><a href="#track" class="footer-link">Track your shipment</a></li>
+          <li><a href="#quote" class="footer-link">Get a quote</a></li>
+          <li><a href="#" class="footer-link">Privacy policy</a></li>
+          <li><a href="#" class="footer-link">Terms & conditions</a></li>
+        </ul>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 Transportex. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#top" class="back-top-btn" aria-label="Back to top" data-back-top-btn>
+    <ion-icon name="chevron-up"></ion-icon>
+  </a>
+
+  <!-- scripts -->
+  <script src="./assets/js/api.js" defer></script>
+  <script src="./assets/js/auth.js" defer></script>
+  <script src="./assets/js/script.js" defer></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
