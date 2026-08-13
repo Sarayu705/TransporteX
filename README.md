@@ -1,6 +1,6 @@
 # Transportex
 
-A redesigned logistics/cargo website with a working Node.js/Express backend.
+A redesigned logistics/cargo website with a working Node.js/Express backend with mongodb database
 
 ```
 Transportex/
