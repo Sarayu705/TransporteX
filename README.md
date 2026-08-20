@@ -1,6 +1,7 @@
 # Transportex
 
-A redesigned logistics/cargo website with a working Node.js/Express backend with mongodb database
+A redesigned logistics/cargo website with a working Node.js/Express backend with mongodb database.
+A modern full-stack logistics and cargo management platform built using **Node.js, Express.js, MongoDB, HTML, CSS, and JavaScript**. The application enables shipment tracking, freight quote requests, customer communication, and newsletter subscriptions through a responsive web interface.
 
 ```
 Transportex/
@@ -23,6 +24,37 @@ Transportex/
 - Endpoints for shipment tracking, contact messages, quote requests, and
   newsletter signups.
 - Basic rate limiting on the write endpoints and CORS configuration.
+
+## Features
+
+- Live Shipment Tracking (by providing the tracking ID)
+- Freight Quote Requests
+- Contact Form
+- Newsletter Subscription
+- Admin Login
+- Admin dashboard (tracks and changes the status of users' shipment using ID)
+- MongoDB Database
+- RESTful API
+- Responsive Design
+
+## Tech Stack
+
+Frontend
+- HTML
+- CSS
+- JavaScript
+
+Backend
+- Node.js
+- Express.js
+
+Database
+- MongoDB
+- Mongoose
+
+Deployment
+- Vercel
+- Render
 
 ## Running it locally
 
