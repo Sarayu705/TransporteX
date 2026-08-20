@@ -10,7 +10,7 @@ Transportex/
 ## Upgrade from original static frontend with different UI and backend
 **Frontend**
 - Full visual redesign: dark "control room" theme, industrial display type
-  (Space Grotesk) paired with Inter and IBM Plex Mono for data readouts.
+  (Space Grotesk) for data readouts.
 - New signature element: a **live manifest** tracking ticket in the hero,
   with a dashed "route line" motif that repeats through the page.
 - New sections that actually do something: a shipment tracker, a freight
